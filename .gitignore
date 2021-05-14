@@ -1,0 +1,6 @@
+.vscode
+AutomatedUITests/bin
+AutomatedUITests/obj
+packages
+.vs/
+*.dll
