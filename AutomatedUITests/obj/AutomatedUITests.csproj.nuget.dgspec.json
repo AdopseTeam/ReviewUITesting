@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ΧΑΡΗΣ\\Desktop\\ReviewUITesting\\AutomatedUITests\\AutomatedUITests.csproj": {}
+    "c:\\Users\\ΧΑΡΗΣ\\Desktop\\ReviewUITesting\\AutomatedUITests\\AutomatedUITests.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ΧΑΡΗΣ\\Desktop\\ReviewUITesting\\AutomatedUITests\\AutomatedUITests.csproj": {
+    "c:\\Users\\ΧΑΡΗΣ\\Desktop\\ReviewUITesting\\AutomatedUITests\\AutomatedUITests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ΧΑΡΗΣ\\Desktop\\ReviewUITesting\\AutomatedUITests\\AutomatedUITests.csproj",
+        "projectUniqueName": "c:\\Users\\ΧΑΡΗΣ\\Desktop\\ReviewUITesting\\AutomatedUITests\\AutomatedUITests.csproj",
         "projectName": "AutomatedUITests",
-        "projectPath": "C:\\Users\\ΧΑΡΗΣ\\Desktop\\ReviewUITesting\\AutomatedUITests\\AutomatedUITests.csproj",
+        "projectPath": "c:\\Users\\ΧΑΡΗΣ\\Desktop\\ReviewUITesting\\AutomatedUITests\\AutomatedUITests.csproj",
         "packagesPath": "C:\\Users\\ΧΑΡΗΣ\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ΧΑΡΗΣ\\Desktop\\ReviewUITesting\\AutomatedUITests\\obj\\",
+        "outputPath": "c:\\Users\\ΧΑΡΗΣ\\Desktop\\ReviewUITesting\\AutomatedUITests\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ΧΑΡΗΣ\\AppData\\Roaming\\NuGet\\NuGet.Config",
