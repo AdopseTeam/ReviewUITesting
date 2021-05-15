@@ -16,5 +16,6 @@ namespace Home.PageObject{
         public string getTitle(){return _driver.Title;}
         public string getUrl(){return url;}
         public WebDriverWait getWait(){return wait;}
+  
     }
 }

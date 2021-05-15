@@ -11,9 +11,12 @@ namespace HomepageTest
     public class Homepage_test
     {
         IWebDriver driver;
-        String baseUrl = "https:\\locahost:5000";
+        String baseUrl = "https:\\locahost:5001";
 
         HomePage home;
+
+        IWebElement MovieElement;
+
         [OneTimeSetUp]
         public void Setup()
         {
@@ -22,11 +25,25 @@ namespace HomepageTest
             home = new HomePage(driver);
         }
 
-
+        [Test]
         public void HomepageLoaded()
         {
             driver.Navigate().GoToUrl( baseUrl + home.getUrl() );
             Assert.True(home.getTitle() == "Home Page - Review");
+        }
+
+         [Test]
+        public void TestTopPicks()
+        {
+           
+            driver.Navigate().GoToUrl( baseUrl + home.getUrl() );
+        
+            MovieElement = driver.FindElements(By.TagName("button"))[8];            
+           
+            MovieElement.Click();
+
+            Assert.True(home.getTitle() == "Top Picks - Review");
+            
         }
 
         [OneTimeTearDown]
