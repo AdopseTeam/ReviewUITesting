@@ -5,6 +5,8 @@ using OpenQA.Selenium.Support.UI;
 using System;
 using Home.PageObject;
 using Movies.PageObject;
+using Users.PageObject;
+
 
 namespace MoviesTest
 {
@@ -12,8 +14,9 @@ namespace MoviesTest
     public class Movies_test
     {
         IWebDriver driver;
-        String baseUrl = "https:\\locahost:5001";
+        String baseUrl = "https://localhost:5001";
 
+        UsersPage users;
         MoviesPage movies;
         
         [OneTimeSetUp]
@@ -31,27 +34,85 @@ namespace MoviesTest
             Assert.True(movies.getTitle() == "Index - Review");
         }
 
+
         [Test]
-        public void MoviesClick()
+        public void Search()
         {
-            driver.Navigate().GoToUrl(baseUrl);
-                
-            driver.FindElement(By.XPath(baseUrl+movies.getUrl())).Click();
-
-            Assert.Equals("Index - Review", driver.Title);
-
+            driver.Navigate().GoToUrl( baseUrl + movies.getUrl());
+            
+            Assert.IsTrue(movies.SearchClick("miraculous"));
 
         }
 
 
         [Test]
-        public void LogedUserMoviesClick()
+        public void NextPage()
         {
-            driver.Navigate().GoToUrl(baseUrl);
-                
-            driver.FindElement(By.XPath("//a[@href='"+baseUrl+movies.getUrl()+"']")).Click();
+            driver.Navigate().GoToUrl( baseUrl + movies.getUrl());
+            
+            Assert.IsTrue(movies.NextPageClick() == baseUrl+movies.getUrl()+"?pageNumber=2");
 
-            Assert.Equals("Movies - Review", driver.Title);
+        }
+        
+        [Test]
+        public void PreviusPage()
+        {
+            driver.Navigate().GoToUrl( baseUrl + movies.getUrl());
+            
+            Assert.IsTrue(movies.PreviousPageClick() == baseUrl+movies.getUrl()+"/Movies?pageNumber=1");
+
+        }
+
+        
+        [Test]
+        public void MovieInfoClick()
+        {
+            driver.Navigate().GoToUrl( baseUrl + movies.getUrl());
+
+            movies.getMoreInfoBTN();
+
+            Assert.IsTrue(movies.Info().Equals("movie-title"));
+
+        }
+
+
+        //Tests for Loged users
+
+        [Test]
+        public void UserLogin()
+        {
+            driver.Navigate().GoToUrl( baseUrl+users.getLoginUrl());
+
+            users.InputLoginFields("ddd@gmail.com","kAl12345!");
+
+            Assert.Equals("Home Page - Review", driver.Title);
+
+        }
+
+
+        [Test]
+        public void MovieWatchlist()
+        {
+            driver.Navigate().GoToUrl( baseUrl+movies.getUrl());
+
+            MoviespageLoaded();
+
+            MovieInfoClick();
+
+            Assert.True(movies.WatchListClick().Equals(baseUrl+"/Watchlist")); 
+
+            Assert.Equals(" - Review", driver.Title);
+
+        }
+
+        [Test]
+        public void WatchlistRemove()
+        {
+            driver.Navigate().GoToUrl(baseUrl+"/Watchlist");
+
+            movies.WatchListRemoveClick();
+            
+            Assert.Equals(" - Review", driver.Title);
 
         }
 

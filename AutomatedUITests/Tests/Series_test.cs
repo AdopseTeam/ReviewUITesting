@@ -12,7 +12,7 @@ namespace SeriesTest
     public class Series_test
     {
         IWebDriver driver;
-        String baseUrl = "https:\\locahost:5001";
+        String baseUrl = "https://localhost:5001";
 
         SeriesPage series;
         
@@ -40,22 +40,63 @@ namespace SeriesTest
 
             Assert.Equals("Series - Review", driver.Title);
 
+        }
+
+
+      [Test]
+        public void Search()
+        {
+            driver.Navigate().GoToUrl( baseUrl + series.getUrl());
+            
+            Assert.IsTrue(series.SearchClick("American Horror Story"));
 
         }
 
+        
+        [Test]
+        public void SeriesInfoClick()
+        {
+            driver.Navigate().GoToUrl( baseUrl + series.getUrl());
+
+            series.getMoreInfoBTN();
+
+            Assert.IsTrue(series.Info().Equals("movie-title"));
+
+        }
+        
+
+        
 
         [Test]
-        public void LogedUserSeriesClick()
+        public void NextPage()
         {
-            driver.Navigate().GoToUrl(baseUrl);
+            driver.Navigate().GoToUrl( baseUrl + series.getUrl());
+            
+            Assert.IsTrue(series.NextPageClick() == baseUrl+series.getUrl()+"?pageNumber=2");
 
-                
-            driver.FindElement(By.XPath("//a[@href='"+baseUrl+series.getUrl()+"']")).Click();
-
-            Assert.Equals("Series - Review", driver.Title);
+        }
+        
+        [Test]
+        public void PreviusPage()
+        {
+            driver.Navigate().GoToUrl( baseUrl + series.getUrl());
+            
+            Assert.IsTrue(series.PreviousPageClick() == baseUrl+series.getUrl()+"/Series?pageNumber=1");
 
         }
 
+        
+        [Test]
+        public void MovieInfoClick()
+        {
+            driver.Navigate().GoToUrl( baseUrl + series.getUrl());
+
+            series.getMoreInfoBTN();
+
+            Assert.IsTrue(series.Info().Equals("movie-title"));
+
+        }
+        
         
         [OneTimeTearDown]
          public void Close()
