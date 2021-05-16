@@ -12,7 +12,7 @@ namespace ActorsTest
     public class Actors_test
     {
         IWebDriver driver;
-        String baseUrl = "https:\\locahost:5001";
+        String baseUrl = "https://localhost:5001";
 
         ActorsPage actors;
         
@@ -32,29 +32,58 @@ namespace ActorsTest
         }
 
         [Test]
-        public void ActorsClick()
+        public void CardsLoaded()
         {
-            driver.Navigate().GoToUrl(baseUrl);
-                
-            driver.FindElement(By.XPath(baseUrl+actors.getUrl())).Click();
+            driver.Navigate().GoToUrl( baseUrl + actors.getUrl() );
+            
+            Assert.IsTrue(actors.ContainsCards());
+    
+        }
 
-            Assert.Equals("Actors - Review", driver.Title);
+        [Test]
+        public void Search()
+        {
+            driver.Navigate().GoToUrl( baseUrl + actors.getUrl());
+            
+            Assert.IsTrue(actors.SearchClick("Adams"));
 
+        }
+
+
+        [Test]
+        public void NextPage()
+        {
+            driver.Navigate().GoToUrl( baseUrl + actors.getUrl());
+            
+            Assert.IsTrue(actors.NextPageClick() == baseUrl+ actors.getUrl() + "/?pageNumber=2");
+
+        }
+        
+        [Test]
+        public void PreviusPage()
+        {
+            driver.Navigate().GoToUrl( baseUrl + actors.getUrl());
+            
+            Assert.IsTrue(actors.PreviousPageClick() == baseUrl+actors.getUrl()+"?pageNumber=1");
+
+        }
+
+        [Test]
+        public void ActorsInfoClick()
+        {
+            driver.Navigate().GoToUrl( baseUrl + actors.getUrl());
+
+            Assert.True(actors.MoreInfo());
+            
+            actors.getMoreInfoBTN().Click();
+
+            Assert.True(actors.getTitle() == "Details - Review");
+
+            Assert.True(actors.TitleInfo() == "Actor");
 
         }
 
         
-        [Test]
-        public void LogedUserActorsClick()
-        {
-            driver.Navigate().GoToUrl(baseUrl);
-                
-            driver.FindElement(By.XPath("//a[@href='"+baseUrl+actors.getUrl()+"']")).Click();
-
-            Assert.Equals("Actors - Review", driver.Title);
-
-
-        }
 
         [OneTimeTearDown]
          public void Close()

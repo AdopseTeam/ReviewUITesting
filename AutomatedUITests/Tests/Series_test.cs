@@ -12,7 +12,7 @@ namespace SeriesTest
     public class Series_test
     {
         IWebDriver driver;
-        String baseUrl = "https:\\locahost:5001";
+        String baseUrl = "https://localhost:5001";
 
         SeriesPage series;
         
@@ -40,19 +40,34 @@ namespace SeriesTest
 
             Assert.Equals("Series - Review", driver.Title);
 
+        }
+
+
+        [Test]
+        public void Search()
+        {
+            driver.Navigate().GoToUrl( baseUrl + series.getUrl());
+            
+            Assert.IsTrue(series.SearchClick("Mike & Molly"));
 
         }
 
 
         [Test]
-        public void LogedUserSeriesClick()
+        public void NextPage()
         {
-            driver.Navigate().GoToUrl(baseUrl);
+            driver.Navigate().GoToUrl( baseUrl + series.getUrl());
+            
+            Assert.IsTrue(series.NextPageClick() == baseUrl+ series.getUrl() + "/?pageNumber=2");
 
-                
-            driver.FindElement(By.XPath("//a[@href='"+baseUrl+series.getUrl()+"']")).Click();
-
-            Assert.Equals("Series - Review", driver.Title);
+        }
+        
+        [Test]
+        public void PreviusPage()
+        {
+            driver.Navigate().GoToUrl( baseUrl + series.getUrl());
+            
+            Assert.IsTrue(series.PreviousPageClick() == baseUrl+series.getUrl()+"?pageNumber=1");
 
         }
 
