@@ -40,7 +40,8 @@ namespace MoviesTest
         {
             driver.Navigate().GoToUrl( baseUrl + movies.getUrl());
             
-            Assert.IsTrue(movies.SearchClick("miraculous"));
+            Assert.True(movies.SearchClick("miraculous").Equals("miraculous") || movies.SearchClick("miraculous").Equals("Miraculous"));
+
 
         }
 
@@ -69,9 +70,9 @@ namespace MoviesTest
         {
             driver.Navigate().GoToUrl( baseUrl + movies.getUrl());
 
-            movies.getMoreInfoBTN();
+            movies.getMoreInfoBTN().Click();
 
-            Assert.IsTrue(movies.Info().Equals("movie-title"));
+            Assert.True(driver.Url == baseUrl+"/Movies/Details/");
 
         }
 
@@ -89,32 +90,6 @@ namespace MoviesTest
 
         }
 
-
-        [Test]
-        public void MovieWatchlist()
-        {
-            driver.Navigate().GoToUrl( baseUrl+movies.getUrl());
-
-            MoviespageLoaded();
-
-            MovieInfoClick();
-
-            Assert.True(movies.WatchListClick().Equals(baseUrl+"/Watchlist")); 
-
-            Assert.Equals(" - Review", driver.Title);
-
-        }
-
-        [Test]
-        public void WatchlistRemove()
-        {
-            driver.Navigate().GoToUrl(baseUrl+"/Watchlist");
-
-            movies.WatchListRemoveClick();
-            
-            Assert.Equals(" - Review", driver.Title);
-
-        }
 
         [OneTimeTearDown]
          public void Close()

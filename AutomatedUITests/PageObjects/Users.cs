@@ -14,7 +14,7 @@ namespace Users.PageObject{
         String urlResendEmail = "/Identity/Account/ResendEmailConfirmation";
 
         String urlManage = "/Identity/Account/Manage";
-        private IWebElement usersEl;
+        private IWebElement Element;
         HomePage home;
 
         private IWebDriver _driver;
@@ -191,6 +191,28 @@ namespace Users.PageObject{
 
             return errorMessage;
         }
+
+        public String WatchListClick(){
+              
+            Element = _driver.FindElement(By.LinkText("Add to WatchList"));
+
+            Element.Click();
+
+            String link = _driver.Url;
+
+            return link;
+
+        }     
+
+
+
+        public void WatchListRemoveClick(){
+              
+            Element = _driver.FindElement(By.LinkText("Remove"));
+
+            Element.Click();
+
+        } 
 
 
         public void SettingPageLoaded(){
