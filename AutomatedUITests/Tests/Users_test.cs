@@ -6,6 +6,7 @@ using System;
 using Home.PageObject;
 using Users.PageObject;
 using Movies.PageObject;
+using Actors.PageObject;
 
 namespace UsersTest
 {
@@ -16,6 +17,10 @@ namespace UsersTest
         String baseUrl = "https://localhost:5001";
 
         UsersPage users;
+
+        MoviesPage movies;
+
+        ActorsPage actors;
         
         [OneTimeSetUp]
         public void Setup()
@@ -103,29 +108,16 @@ namespace UsersTest
 
             Assert.Equals("Register confirmation - Review", driver.Title);
 
-            
-        }
-
-        
-        [Test]
-        public void RegisterConfirmAccountClick()
-        {
-            driver.Navigate().GoToUrl(baseUrl+"Identity/Account/RegisterConfirmation??email=@value");
-
             users.ConfirmAccountClick();
 
             Assert.Equals("Register Confirmation - Review", driver.Title);
 
-        }
-
-        [Test]
-        public void ConfirmAccountSuccess()
-        {
-            driver.Navigate().GoToUrl(baseUrl+"Identity/Account/ConfirmEmail?userId=@value");
-
+            
             Assert.Equals("Confirm email - Review", driver.Title);
-
+            
         }
+
+    
 
         //Test Methods for Login Page
 
@@ -195,10 +187,65 @@ namespace UsersTest
         {
             driver.Navigate().GoToUrl( baseUrl+users.getLoginUrl());
 
-            users.InputLoginFields("ddd@gmail.com","kAl12345!");
+            users.InputLoginFields("test@gmail.com","kAl12345!");
 
             Assert.Equals("Home Page - Review", driver.Title);
 
+
+        }
+        
+        [Test]
+        public void MoviespageLoaded()
+        {
+            driver.Navigate().GoToUrl( baseUrl + movies.getUrl() );
+            Assert.True(movies.getTitle() == "Index - Review");
+        }
+
+        [Test]
+        public void MovieInfoClick()
+        {
+            driver.Navigate().GoToUrl( baseUrl + movies.getUrl());
+
+            movies.getMoreInfoBTN();
+
+            Assert.True(driver.Url == baseUrl+"/Movies/Details/");
+
+        }
+
+        [Test]
+        public void ActorInfoClick()
+        {
+            driver.Navigate().GoToUrl( baseUrl + actors.getUrl());
+
+            movies.getMoreInfoBTN();
+
+            Assert.True(driver.Url == baseUrl+"/Actor/Details/");
+
+        }
+
+        [Test]
+        public void MovieWatchlist()
+        {
+            driver.Navigate().GoToUrl( baseUrl+movies.getUrl());
+
+            MoviespageLoaded();
+
+            MovieInfoClick();
+
+            Assert.True(users.WatchListClick().Equals(baseUrl+"/Watchlist")); 
+
+            Assert.Equals(" - Review", driver.Title);
+
+        }
+
+        [Test]
+        public void WatchlistRemove()
+        {
+            driver.Navigate().GoToUrl(baseUrl+"/Watchlist");
+
+            users.WatchListRemoveClick();
+            
+            Assert.Equals(" - Review", driver.Title);
 
         }
 

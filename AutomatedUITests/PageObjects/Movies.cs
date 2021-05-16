@@ -31,7 +31,7 @@ namespace Movies.PageObject{
         }    
 
 
-        public Boolean SearchClick(String title){
+        public IWebElement SearchClick(String title){
                 
                 _driver.FindElement(By.Id("title")).SendKeys(title);
 
@@ -39,20 +39,16 @@ namespace Movies.PageObject{
 
                 Element.Click();
 
-                String moviesT = _driver.FindElement(By.TagName("h5")).Text;
+                IWebElement moviesT = _driver.FindElement(By.XPath(("//*[text()='"+title+"']")));
 
-                if(moviesT.Equals(title)){
-                    return true;
-                }
-
-                return false;
-
+                return moviesT;
+        
         }        
 
 
         public String NextPageClick(){
               
-            Element = _driver.FindElement(By.LinkText("Next Page"));
+            Element = _driver.FindElement(By.LinkText("Next"));
 
             Element.Click();
 
@@ -65,7 +61,7 @@ namespace Movies.PageObject{
 
         public String PreviousPageClick(){
               
-            Element = _driver.FindElement(By.LinkText("Previous Page"));
+            Element = _driver.FindElement(By.LinkText("Previous"));
 
             Element.Click();
 
@@ -75,36 +71,12 @@ namespace Movies.PageObject{
 
         }
 
-        public String WatchListClick(){
-              
-            Element = _driver.FindElement(By.LinkText("Add to WatchList"));
-
-            Element.Click();
-
-            String link = _driver.Url;
-
-            return link;
-
-        }     
-
-
-
-        public void WatchListRemoveClick(){
-              
-            Element = _driver.FindElement(By.LinkText("Remove"));
-
-            Element.Click();
-
-        } 
-
-
-
-        public IWebElement getMoreInfoBTN(){ return Element = _driver.FindElement(By.TagName("a")) ; }
+        public IWebElement getMoreInfoBTN(){ return Element = _driver.FindElement(By.LinkText("More info")) ; }
     
         
-        public IWebElement Info(){ 
+        public void Info(){ 
 
-            return  _driver.FindElement(By.ClassName("movie-title"));
+            getMoreInfoBTN().Click();
             
          }
 

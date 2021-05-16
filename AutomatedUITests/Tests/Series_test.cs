@@ -48,7 +48,7 @@ namespace SeriesTest
         {
             driver.Navigate().GoToUrl( baseUrl + series.getUrl());
             
-            Assert.IsTrue(series.SearchClick("American Horror Story"));
+            Assert.True(series.SearchClick("American Horror Story").Equals("American Horror Story"));
 
         }
 
@@ -58,9 +58,9 @@ namespace SeriesTest
         {
             driver.Navigate().GoToUrl( baseUrl + series.getUrl());
 
-            series.getMoreInfoBTN();
+            series.getMoreInfoBTN().Click();
 
-            Assert.IsTrue(series.Info().Equals("movie-title"));
+            Assert.True(driver.Url == baseUrl+"/Series/Details/");
 
         }
         
@@ -85,18 +85,7 @@ namespace SeriesTest
 
         }
 
-        
-        [Test]
-        public void MovieInfoClick()
-        {
-            driver.Navigate().GoToUrl( baseUrl + series.getUrl());
 
-            series.getMoreInfoBTN();
-
-            Assert.IsTrue(series.Info().Equals("movie-title"));
-
-        }
-        
         
         [OneTimeTearDown]
          public void Close()

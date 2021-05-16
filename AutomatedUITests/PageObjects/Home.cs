@@ -23,16 +23,22 @@ namespace Home.PageObject{
 
         public WebDriverWait getWait(){return wait;}
 
-        public IWebElement getMoreInfoBTN(){ return HomeEl = _driver.FindElement(By.LinkText("More Info")) ; }
-        
-        public void MoreInfo(){
+        public IWebElement getMoreInfoBTN(){ 
+            return HomeEl = _driver.FindElement(By.LinkText("More info")) ; }
+
+        public IWebElement getMoreInfoBTNActors(){ 
+            return HomeEl = _driver.FindElement(By.XPath("//a[@href='"+url+"//Actor/Details/']")) ; }
+
+        public void InfoM(){ 
 
             getMoreInfoBTN().Click();
-            
-        }
+
+         }
 
 
-        public IWebElement Info(){ 
+        public IWebElement InfoA(){ 
+
+            getMoreInfoBTNActors().Click();
 
             return  _driver.FindElement(By.ClassName("movie-title"));
             
@@ -77,7 +83,7 @@ namespace Home.PageObject{
 
         public void ReleasedthisMonthPage()
         {
-            HomeEl = _driver.FindElement(By.LinkText("Released On May"));
+            HomeEl = _driver.FindElement(By.XPath("//*[text()='Released On May']"));
             HomeEl.Click();
             
         } 
@@ -85,7 +91,7 @@ namespace Home.PageObject{
         
         public void BornThisMonthPage()
         {
-            HomeEl = _driver.FindElement(By.LinkText("Born On May"));
+            HomeEl = _driver.FindElement(By.XPath("//*[text()='Born On May']"));
             HomeEl.Click();
             
         } 
@@ -93,7 +99,7 @@ namespace Home.PageObject{
         
         public void TopMoviesPage()
         {
-            HomeEl = _driver.FindElement(By.LinkText("Top Movies"));
+            HomeEl = _driver.FindElement(By.XPath("//*[text()='Top Movies']"));
             HomeEl.Click();
             
         } 

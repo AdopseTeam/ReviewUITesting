@@ -37,9 +37,9 @@ namespace HomepageTest
         {
             driver.Navigate().GoToUrl( baseUrl + home.getUrl());
 
-            home.getMoreInfoBTN();
+            home.InfoM();
 
-            Assert.IsTrue(home.Info().Equals("movie-title"));
+            Assert.True(driver.Url == baseUrl+"/Movies/Details/");            
         }
 
         [Test]
@@ -47,7 +47,7 @@ namespace HomepageTest
         {
             driver.Navigate().GoToUrl( baseUrl + home.getUrl());
 
-            home.MoreInfo();
+            home.InfoA();
 
             Assert.True(driver.Url == baseUrl + "/Actor/Details/");
 

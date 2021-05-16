@@ -36,7 +36,7 @@ namespace ActorsTest
         {
             driver.Navigate().GoToUrl( baseUrl + actors.getUrl());
             
-            Assert.IsTrue(actors.SearchClick("Adams"));
+            Assert.True(actors.SearchClick("Adams").Equals("Adams") || actors.SearchClick("Adams").Equals("adams"));
 
         }
 
@@ -46,7 +46,7 @@ namespace ActorsTest
         {
             driver.Navigate().GoToUrl( baseUrl + actors.getUrl());
             
-            Assert.IsTrue(actors.NextPageClick() == baseUrl+ actors.getUrl() + "/?pageNumber=2");
+            Assert.IsTrue(actors.NextPageClick() == baseUrl+ actors.getUrl() + "//?pageNumber=2");
 
         }
         
@@ -55,7 +55,7 @@ namespace ActorsTest
         {
             driver.Navigate().GoToUrl( baseUrl + actors.getUrl());
             
-            Assert.IsTrue(actors.PreviousPageClick() == baseUrl+actors.getUrl()+"?pageNumber=1");
+            Assert.IsTrue(actors.PreviousPageClick() == baseUrl+actors.getUrl()+"//?pageNumber=1");
 
         }
 
@@ -65,9 +65,9 @@ namespace ActorsTest
         {
             driver.Navigate().GoToUrl( baseUrl + actors.getUrl());
 
-            actors.getMoreInfoBTN();
+            actors.getMoreInfoBTN().Click();
 
-            Assert.IsTrue(actors.Info().Equals("movie-title"));
+            Assert.True(driver.Url == baseUrl+"/Actor/Details/");
 
         }
 

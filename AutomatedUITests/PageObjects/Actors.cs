@@ -26,7 +26,7 @@ namespace Actors.PageObject{
         {
             getElement().Click();
         } 
-  public Boolean SearchClick(String title){
+  public IWebElement SearchClick(String title){
                 
                 _driver.FindElement(By.Id("title")).SendKeys(title);
 
@@ -34,33 +34,16 @@ namespace Actors.PageObject{
 
                 Element.Click();
 
-                String moviesT = _driver.FindElement(By.TagName("h5")).Text;
+                IWebElement T = _driver.FindElement(By.XPath(("//*[text()='"+title+"']")));
 
-                if(moviesT.Equals(title)){
-                    return true;
-                }
-
-                return false;
+                return T;
 
         }               
 
 
-        public String NextPageClick(){
-              
-            Element = _driver.FindElement(By.XPath("//a[@href='"+home.getUrl()+url+"/Movies?pageNumber=2']"));
-
-            Element.Click();
-
-            String link = _driver.Url;
-
-            return link;
-
-        }        
-
-        
         public String PreviousPageClick(){
               
-            Element = _driver.FindElement(By.XPath("//a[@href='"+home.getUrl()+url+"/Movies?pageNumber=1']"));
+            Element = _driver.FindElement(By.LinkText("Previous"));
 
             Element.Click();
 
@@ -68,20 +51,25 @@ namespace Actors.PageObject{
 
             return link;
 
-        }  
+        }
 
-
-        public IWebElement getMoreInfoBTN(){ return Element = _driver.FindElement(By.TagName("a")) ; }
-    
         
-        public IWebElement Info(){ 
+        public String NextPageClick(){
+              
+            Element = _driver.FindElement(By.LinkText("Next"));
 
-            return  _driver.FindElement(By.ClassName("movie-title"));
-            
-         }  
+            Element.Click();
+
+            String link = _driver.Url;
+
+            return link;
+
+        }       
 
 
-
+        public IWebElement getMoreInfoBTN(){
+             return Element = _driver.FindElement(By.LinkText("More info")) ; }
+    
 
     }
 }

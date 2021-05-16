@@ -48,7 +48,7 @@ namespace Series.PageObject{
                
                 return false;
         }
-            public Boolean SearchClick(String title){
+            public IWebElement SearchClick(String title){
                 
                 _driver.FindElement(By.Id("title")).SendKeys(title);
 
@@ -56,19 +56,14 @@ namespace Series.PageObject{
 
                 Element.Click();
 
-                String seriesT = _driver.FindElement(By.TagName("h5")).Text;
+                IWebElement seriesT = _driver.FindElement(By.XPath(("//*[text()='"+title+"']")));
 
-                if(seriesT.Equals(title)){
-                    return true;
-                }
-
-                return false;
-
+                return seriesT;
         }         
 
         public String NextPageClick(){
               
-            Element = _driver.FindElement(By.LinkText("Next Page"));
+            Element = _driver.FindElement(By.LinkText("Next"));
 
             Element.Click();
 
@@ -81,7 +76,7 @@ namespace Series.PageObject{
 
         public String PreviousPageClick(){
               
-            Element = _driver.FindElement(By.LinkText("Previous Page"));
+            Element = _driver.FindElement(By.LinkText("Previous"));
 
             Element.Click();
 
@@ -93,13 +88,12 @@ namespace Series.PageObject{
 
 
 
-        public IWebElement getMoreInfoBTN(){ return Element = _driver.FindElement(By.TagName("a")) ; }
+        public IWebElement getMoreInfoBTN(){ return Element = _driver.FindElement(By.LinkText("More info")) ; }
     
         
-        public IWebElement Info(){ 
+        public void Info(){ 
 
-            return  _driver.FindElement(By.ClassName("movie-title"));
-            
+           getMoreInfoBTN().Click();
          }
 
         } 
