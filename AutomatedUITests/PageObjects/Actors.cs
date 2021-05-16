@@ -6,7 +6,7 @@ using OpenQA.Selenium.Support.UI;
 
 namespace Actors.PageObject{
    public class ActorsPage{
-        String url = "\\Actors";
+        String url = "\\Actor";
         private IWebDriver _driver;
         private  WebDriverWait wait;
         private IWebElement Element;
@@ -26,33 +26,23 @@ namespace Actors.PageObject{
         {
             getElement().Click();
         } 
-
-                public Boolean ContainsCards(){
-
-                Element = _driver.FindElement(By.ClassName("card"));
-
-                if(Element.Equals("card"))  return true;
-               
-                return false;
-        }
-
-        public Boolean SearchClick(String title){
+  public Boolean SearchClick(String title){
                 
                 _driver.FindElement(By.Id("title")).SendKeys(title);
 
-                Element = _driver.FindElement(By.XPath("//input[@type='submit']"));
+                Element = _driver.FindElement(By.XPath("//input[@type='submit' and @value='Search']"));
 
                 Element.Click();
 
                 String moviesT = _driver.FindElement(By.TagName("h5")).Text;
 
-                if(moviesT.Contains(title)){
+                if(moviesT.Equals(title)){
                     return true;
                 }
 
                 return false;
 
-        }        
+        }               
 
 
         public String NextPageClick(){
@@ -82,39 +72,16 @@ namespace Actors.PageObject{
 
 
         public IWebElement getMoreInfoBTN(){ return Element = _driver.FindElement(By.TagName("a")) ; }
+    
         
-        public Boolean MoreInfo(){
+        public IWebElement Info(){ 
 
-             var El = getMoreInfoBTN().Text;
+            return  _driver.FindElement(By.ClassName("movie-title"));
             
-             if(El == "More info"){
-                 return true;
-             }
-
-             return false;
-   
-        }
+         }  
 
 
-        public String TitleInfo(){ 
 
-            String El;
-
-            return El = _driver.FindElement(By.TagName("h4")).Text ; 
-            
-            }
-
-        public void BackToActorsListBtn()
-        {
-            Element = _driver.FindElement(By.TagName("a"));
-
-            var El2 = _driver.FindElement(By.TagName("a")).Text;
-
-            if(El2 == "/Actors"){
-               Element.Click();
-            } 
-            
-        } 
 
     }
 }

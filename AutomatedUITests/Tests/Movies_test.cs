@@ -34,14 +34,6 @@ namespace MoviesTest
             Assert.True(movies.getTitle() == "Index - Review");
         }
 
-        [Test]
-        public void CardsLoaded()
-        {
-            driver.Navigate().GoToUrl( baseUrl + movies.getUrl() );
-            
-            Assert.IsTrue(movies.ContainsCards());
-    
-        }
 
         [Test]
         public void Search()
@@ -77,28 +69,12 @@ namespace MoviesTest
         {
             driver.Navigate().GoToUrl( baseUrl + movies.getUrl());
 
-            Assert.True(movies.MoreInfo());
-            
-            movies.getMoreInfoBTN().Click();
+            movies.getMoreInfoBTN();
 
-            Assert.True(movies.getTitle() == "Details - Review");
-
-            Assert.True(movies.TitleInfo() == "Movie");
+            Assert.IsTrue(movies.Info().Equals("movie-title"));
 
         }
 
-        [Test]
-        public void BackToMoviesListClick()
-        {
-            driver.Navigate().GoToUrl(baseUrl);
-
-            MovieInfoClick();
-
-            movies.BackToMoviesListBtn();
-
-            Assert.Equals("Index - Review", driver.Title);
-
-        }
 
         //Tests for Loged users
 

@@ -48,29 +48,27 @@ namespace Series.PageObject{
                
                 return false;
         }
-
-        public Boolean SearchClick(String title){
+            public Boolean SearchClick(String title){
                 
                 _driver.FindElement(By.Id("title")).SendKeys(title);
 
-                Element = _driver.FindElement(By.XPath("//input[@type='submit']"));
+                Element = _driver.FindElement(By.XPath("//input[@type='submit' and @value='Search']"));
 
                 Element.Click();
 
-                String moviesT = _driver.FindElement(By.TagName("h5")).Text;
+                String seriesT = _driver.FindElement(By.TagName("h5")).Text;
 
-                if(moviesT.Contains(title)){
+                if(seriesT.Equals(title)){
                     return true;
                 }
 
                 return false;
 
-        }        
-
+        }         
 
         public String NextPageClick(){
               
-            Element = _driver.FindElement(By.XPath("//a[@href='"+home.getUrl()+url+"?pageNumber=2']"));
+            Element = _driver.FindElement(By.LinkText("Next Page"));
 
             Element.Click();
 
@@ -79,10 +77,11 @@ namespace Series.PageObject{
             return link;
 
         }        
-        
+
+
         public String PreviousPageClick(){
               
-            Element = _driver.FindElement(By.XPath("//a[@href='"+home.getUrl()+url+"?pageNumber=1']"));
+            Element = _driver.FindElement(By.LinkText("Previous Page"));
 
             Element.Click();
 
@@ -92,6 +91,18 @@ namespace Series.PageObject{
 
         }
 
+
+
+        public IWebElement getMoreInfoBTN(){ return Element = _driver.FindElement(By.TagName("a")) ; }
+    
+        
+        public IWebElement Info(){ 
+
+            return  _driver.FindElement(By.ClassName("movie-title"));
+            
+         }
+
+        } 
+
         
     }
-}

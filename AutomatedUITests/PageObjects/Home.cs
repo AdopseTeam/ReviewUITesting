@@ -23,37 +23,20 @@ namespace Home.PageObject{
 
         public WebDriverWait getWait(){return wait;}
 
-        public IWebElement getMoreInfoBTN(){ return HomeEl = _driver.FindElement(By.TagName("a")) ; }
+        public IWebElement getMoreInfoBTN(){ return HomeEl = _driver.FindElement(By.LinkText("More Info")) ; }
         
-        public Boolean MoreInfo(){
+        public void MoreInfo(){
 
-             var HomeEl = getMoreInfoBTN().Text;
-            
-             if(HomeEl == "More info"){
-                 return true;
-             }
-
-             return false;
-             
+            getMoreInfoBTN().Click();
             
         }
 
-        public String TitleInfo(){ 
 
-            String HomeEl;
+        public IWebElement Info(){ 
 
-            return HomeEl = _driver.FindElement(By.TagName("h4")).Text ;
-             }
-
-
-        public Boolean ContainsCards(){
-                HomeEl = _driver.FindElement(By.ClassName("card"));
-
-                if(HomeEl.Equals("card"))  return true;
-               
-                return false;
-        }
-
+            return  _driver.FindElement(By.ClassName("movie-title"));
+            
+         }
 
         public void goToMoviesPage()
         {
@@ -87,34 +70,31 @@ namespace Home.PageObject{
 
         public void LogoHomePage()
         {
-            HomeEl = _driver.FindElement(By.TagName("a"));
-            var HomeEl2 = _driver.FindElement(By.TagName("a")).Text;
-
-            if(HomeEl2 == "/"){
-               HomeEl.Click();
-            } 
+            HomeEl = _driver.FindElement(By.XPath("//a[@href=/]"));
+            HomeEl.Click();
             
         } 
 
-        public void BackToMoviesListBtn()
+        public void ReleasedthisMonthPage()
         {
-            HomeEl = _driver.FindElement(By.TagName("a"));
-            var HomeEl2 = _driver.FindElement(By.TagName("a")).Text;
-
-            if(HomeEl2 == "/Movies"){
-               HomeEl.Click();
-            } 
+            HomeEl = _driver.FindElement(By.LinkText("Released On May"));
+            HomeEl.Click();
             
         } 
 
-        public void BackToActorsListBtn()
+        
+        public void BornThisMonthPage()
         {
-            HomeEl = _driver.FindElement(By.TagName("a"));
-            var HomeEl2 = _driver.FindElement(By.TagName("a")).Text;
+            HomeEl = _driver.FindElement(By.LinkText("Born On May"));
+            HomeEl.Click();
+            
+        } 
 
-            if(HomeEl2 == "/Actors"){
-               HomeEl.Click();
-            } 
+        
+        public void TopMoviesPage()
+        {
+            HomeEl = _driver.FindElement(By.LinkText("Top Movies"));
+            HomeEl.Click();
             
         } 
         

@@ -32,15 +32,6 @@ namespace ActorsTest
         }
 
         [Test]
-        public void CardsLoaded()
-        {
-            driver.Navigate().GoToUrl( baseUrl + actors.getUrl() );
-            
-            Assert.IsTrue(actors.ContainsCards());
-    
-        }
-
-        [Test]
         public void Search()
         {
             driver.Navigate().GoToUrl( baseUrl + actors.getUrl());
@@ -68,18 +59,15 @@ namespace ActorsTest
 
         }
 
+        
         [Test]
         public void ActorsInfoClick()
         {
             driver.Navigate().GoToUrl( baseUrl + actors.getUrl());
 
-            Assert.True(actors.MoreInfo());
-            
-            actors.getMoreInfoBTN().Click();
+            actors.getMoreInfoBTN();
 
-            Assert.True(actors.getTitle() == "Details - Review");
-
-            Assert.True(actors.TitleInfo() == "Actor");
+            Assert.IsTrue(actors.Info().Equals("movie-title"));
 
         }
 

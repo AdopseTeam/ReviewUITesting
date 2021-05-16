@@ -28,18 +28,8 @@ namespace HomepageTest
         [Test]
         public void HomepageLoaded()
         {
-            driver.Navigate().GoToUrl( baseUrl + home.getUrl() );
+            driver.Navigate().GoToUrl( baseUrl);
             Assert.True(home.getTitle() == "Home Page - Review");
-        }
-
-
-        [Test]
-        public void HomepageCardsLoding()
-        {
-            driver.Navigate().GoToUrl( baseUrl + home.getUrl() );
-            
-            Assert.IsTrue(home.ContainsCards());
-    
         }
 
         [Test]
@@ -47,14 +37,9 @@ namespace HomepageTest
         {
             driver.Navigate().GoToUrl( baseUrl + home.getUrl());
 
-            Assert.True(home.MoreInfo());
-            
-            home.getMoreInfoBTN().Click();
+            home.getMoreInfoBTN();
 
-            Assert.True(home.getTitle() == "Details - Review");
-
-            Assert.True(home.TitleInfo() == "Movie");
-
+            Assert.IsTrue(home.Info().Equals("movie-title"));
         }
 
         [Test]
@@ -62,13 +47,9 @@ namespace HomepageTest
         {
             driver.Navigate().GoToUrl( baseUrl + home.getUrl());
 
-            Assert.True(home.MoreInfo());
-            
-            home.getMoreInfoBTN().Click();
+            home.MoreInfo();
 
-            Assert.True(home.getTitle() == "Details - Review");
-
-            Assert.True(home.TitleInfo() == "Actor");
+            Assert.True(driver.Url == baseUrl + "/Actor/Details/");
 
         }
 
@@ -140,32 +121,40 @@ namespace HomepageTest
         }
 
         [Test]
-        public void BackToMoviesListClick()
+        public void ReleasedThisMonthClick()
         {
             driver.Navigate().GoToUrl(baseUrl);
+                
+            home.ReleasedthisMonthPage();
 
-            HomepageMovieInfoClick();
-
-            home.BackToMoviesListBtn();
-
-            Assert.Equals("Index - Review", driver.Title);
+            Assert.Equals("Released On This Month - Review", driver.Title);
 
         }
 
         [Test]
-        public void BackToActorsListClick()
+        public void Top10PicksClick()
         {
             driver.Navigate().GoToUrl(baseUrl);
-            
-            HomepageMovieInfoClick();
+                
+            home.TopMoviesPage();
 
-            home.BackToMoviesListBtn();
-
-            Assert.Equals("Index - Review", driver.Title);
+            Assert.Equals("Top Rating Movies - Review", driver.Title);
 
         }
-       
 
+        [Test]
+        public void BornThisMonthClick()
+        {
+            driver.Navigate().GoToUrl(baseUrl);
+                
+            home.BornThisMonthPage();
+
+            Assert.Equals("Born This Month - Review", driver.Title);
+
+        }
+
+        
+       
         
         [OneTimeTearDown]
          public void Close()

@@ -43,22 +43,36 @@ namespace SeriesTest
         }
 
 
-        [Test]
+      [Test]
         public void Search()
         {
             driver.Navigate().GoToUrl( baseUrl + series.getUrl());
             
-            Assert.IsTrue(series.SearchClick("Mike & Molly"));
+            Assert.IsTrue(series.SearchClick("American Horror Story"));
 
         }
 
+        
+        [Test]
+        public void SeriesInfoClick()
+        {
+            driver.Navigate().GoToUrl( baseUrl + series.getUrl());
+
+            series.getMoreInfoBTN();
+
+            Assert.IsTrue(series.Info().Equals("movie-title"));
+
+        }
+        
+
+        
 
         [Test]
         public void NextPage()
         {
             driver.Navigate().GoToUrl( baseUrl + series.getUrl());
             
-            Assert.IsTrue(series.NextPageClick() == baseUrl+ series.getUrl() + "/?pageNumber=2");
+            Assert.IsTrue(series.NextPageClick() == baseUrl+series.getUrl()+"?pageNumber=2");
 
         }
         
@@ -67,10 +81,22 @@ namespace SeriesTest
         {
             driver.Navigate().GoToUrl( baseUrl + series.getUrl());
             
-            Assert.IsTrue(series.PreviousPageClick() == baseUrl+series.getUrl()+"?pageNumber=1");
+            Assert.IsTrue(series.PreviousPageClick() == baseUrl+series.getUrl()+"/Series?pageNumber=1");
 
         }
 
+        
+        [Test]
+        public void MovieInfoClick()
+        {
+            driver.Navigate().GoToUrl( baseUrl + series.getUrl());
+
+            series.getMoreInfoBTN();
+
+            Assert.IsTrue(series.Info().Equals("movie-title"));
+
+        }
+        
         
         [OneTimeTearDown]
          public void Close()
